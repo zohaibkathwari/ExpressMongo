@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html ng-app="ContactApp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <title>contactsList</title>
+</head>
+<body>
+<div class="container">
+    <h1>ContactJS</h1>
+    <table class="table" ng-controller="AppCtrl">
+        <thead>
+        <tr>
+            <th>name</th>
+            <th>email</th>
+            <th>number</th>
+            <th>Action</th>
+            <th>&nbsp;</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td><input type="text" class="form-control" ng-model="contact.name"/></td>
+            <td><input type="text" class="form-control" ng-model="contact.email"/></td>
+            <td><input type="text" class="form-control" ng-model="contact.number"/></td>
+            <td><input type="button" class="btn btn-primary" value="Add" ng-click="addContact()"/></td>
+            <td><input type="button" class="btn btn-info" value="Update" ng-click="update()"/></td>
+        </tr>
+            <tr ng-repeat="contact in contactList">
+                <td>{{contact.name}}</td>
+                <td>{{contact.email}}</td>
+                <td>{{contact.number}}</td>
+                <td><input type="button" class="btn btn-danger" value="Del" ng-click="remove(contact._id)"/></td>
+                <td><input type="button" class="btn btn-primary" value="Edit" ng-click="edit(contact._id)"/></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+<script src="controllers/app.js"></script>
+</body>
+</html>
