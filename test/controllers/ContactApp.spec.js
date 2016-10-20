@@ -39,11 +39,13 @@ describe('AppCtrl', function(){
     });
 
     describe('addContact', function(){
-        var response = '';
+        var response;
+        var contact = {"_id":"57fe9d1a5cf9b50d31128e25","name":"tim","email":"tim@gmail.com","number":"675577-777-888"};
         it('should add the user input contact whenever called', function(){
-            $httpBackend.expectPOST('/contacts', $scope.contact).respond(200, response);
+            $httpBackend.expectPOST('/contacts', contact).respond(201, response);
             $httpBackend.flush();
-            expect($scope.contact).toBe(response);
+            expect(contact).toBe(response);
+
         });
     });
     /*});*/

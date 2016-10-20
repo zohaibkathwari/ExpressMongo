@@ -44,8 +44,8 @@ app.delete('/contacts/:id', function(req, res) {
 //EDIT API
 app.get('/contacts/:id', function(req, res) {
     var id = req.params.id;
-    db.contactlist.findOne({_id: mongojs.ObjectId(id)}, function(err, docs) {
-        res.json(docs);
+    db.contactlist.findOne({_id: mongojs.ObjectId(id)}, function(err, doc) {
+        res.json(doc);
     });
     console.log('EDIT ID: ', id);
 });
@@ -56,9 +56,9 @@ app.put('/contacts/:id', function(req, res) {
     console.log(req.body.name);
     db.contactlist.findAndModify({query: {_id: mongojs.ObjectId(id)},
         update: {$set: {name: req.body.name, email: req.body.email, number: req.body.number}},
-        new: true, function (err, doc) {
+        new: true}, function (err, doc) {
                 res.json(doc);
-        }});
+        });
 });
 
 app.listen('3000');

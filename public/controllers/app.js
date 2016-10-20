@@ -17,8 +17,8 @@ app.controller('AppCtrl', ['$scope', '$http', function($scope, $http){
 
     $scope.addContact = function () {
         $http.post('/contacts', $scope.contact).success(function(response){
-            console.log('post response', response);
-            $scope.contact = '';
+            console.log(response);
+            $scope.clear();
             refresh(); //Refresh and bind updated data
         });
     }
@@ -28,6 +28,7 @@ app.controller('AppCtrl', ['$scope', '$http', function($scope, $http){
         $http.delete('/contacts/' + id).success(function(response) {
             refresh(); //Refresh and bind updated data
         });
+        $scope.clear();
     }
 
     $scope.edit = function (id) {
@@ -43,6 +44,11 @@ app.controller('AppCtrl', ['$scope', '$http', function($scope, $http){
         $http.put('/contacts/' + $scope.contact._id, $scope.contact).success(function (response) {
             console.log('PUT', response);
            refresh(); //Refresh and bind updated data
+            $scope.clear();
         });
+    }
+
+    $scope.clear = function() {
+        $scope.contact = '';
     }
 }]);
