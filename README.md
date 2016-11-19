@@ -1,2 +1,2 @@
 # mean-contact
-test mean
+test mean stack
