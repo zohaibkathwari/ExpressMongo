@@ -4,12 +4,16 @@
 var express = require('express');
 var app = express();
 var mongojs = require('mongojs');
+var server = require('http').Server(app);
+var io = require('socket.io')(server);
 var db = mongojs('contactlist', ['contactlist']);
 var bodyParser = require('body-parser');
+
 
 //MIDDLEWARES
 
 app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/node_modules'));
 app.use(bodyParser.json());
 
 //GET REST API
@@ -61,5 +65,16 @@ app.put('/contacts/:id', function(req, res) {
         });
 });
 
-app.listen('3000');
-console.log('app running on port 3000');
+server.listen(3000, function(){
+    io.on('connection', function(socket){
+        console.log('A user connected');
+        socket.on('disconnect', function () {
+            console.log('A user disconnected');
+        });
+
+        socket.on('hello', function () {
+            console.log('Hello Sire!');
+        })
+    });
+    console.log('listening on *:3000');
+});

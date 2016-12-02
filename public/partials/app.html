@@ -1,0 +1,29 @@
+<table class="table" ng-controller="AppCtrl">
+    <thead>
+    <tr>
+        <th>name</th>
+        <th>email</th>
+        <th>number</th>
+        <th>Action</th>
+        <th>&nbsp;</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td><input type="text" class="form-control" ng-model="contact.name"/></td>
+        <td><input type="text" class="form-control" ng-model="contact.email"/></td>
+        <td><input type="text" class="form-control" ng-model="contact.number"/></td>
+        <td><input type="button" class="btn btn-primary" value="Add" ng-click="addContact()"/></td>
+        <td><input type="button" class="btn btn-info" value="Update" ng-click="update()"/></td>
+        <td><input type="button" class="btn btn-warning" value="Clear" ng-click="clear()"/></td>
+    </tr>
+    <tr ng-repeat="contact in contactList">
+        <td>{{contact.name}}</td>
+        <td>{{contact.email}}</td>
+        <td>{{contact.number}}</td>
+        <td><input type="button" class="btn btn-danger" value="Del" ng-click="remove(contact._id)"/></td>
+        <td><input type="button" class="btn btn-primary" value="Edit" ng-click="edit(contact._id)"/></td>
+        <td>&nbsp;</td>
+    </tr>
+    </tbody>
+</table>
