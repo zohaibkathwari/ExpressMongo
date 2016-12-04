@@ -9,11 +9,14 @@ var io = require('socket.io')(server);
 var db = mongojs('contactlist', ['contactlist']);
 var bodyParser = require('body-parser');
 
+var siofu = require("socketio-file-upload");
+
 
 //MIDDLEWARES
 
 app.use(express.static(__dirname + '/public'));
 app.use(express.static(__dirname + '/node_modules'));
+app.use(siofu.router).listen(8000);
 app.use(bodyParser.json());
 
 //GET REST API
@@ -67,14 +70,19 @@ app.put('/contacts/:id', function(req, res) {
 
 server.listen(3000, function(){
     io.on('connection', function(socket){
+        var uploader = new siofu();
         console.log('A user connected');
+
         socket.on('disconnect', function () {
             console.log('A user disconnected');
         });
 
-        socket.on('hello', function () {
-            console.log('Hello Sire!');
-        })
+        uploader.on("saved", function(event){
+            socket.emit('fileUploadSuccess', event.file);
+        });
+
+        uploader.dir = "uploads/files/images";
+        uploader.listen(socket);
     });
     console.log('listening on *:3000');
 });

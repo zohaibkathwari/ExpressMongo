@@ -33,6 +33,7 @@
   "dependencies": {
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
-    "parse-body": "^1.0.3"
+    "parse-body": "^1.0.3",
+    "socketio-file-upload": "^0.5.2"
   }
 }

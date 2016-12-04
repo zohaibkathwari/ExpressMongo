@@ -1,9 +1,18 @@
 /**
  * Created by Zuhaib on 12/3/2016.
  */
-app.controller('AppCtrl', ['$scope', '$http', 'socket', function($scope, $http, socket){
-
+app.controller('AppCtrl', ['$scope', '$http', 'socket', 'upload', 'appService', function($scope, $http, socket, upload, appService){
+    /*$scope.success = true;*/
     socket.emit('hello', function () {});
+
+    console.log('appService: ', appService)
+
+    upload.listenOnInput("upload_input");
+
+    socket.on('fileUploadSuccess', function (data) {
+        $scope.success =  data.success;
+        console.log('success: ', data.success);
+    });
 
     var refresh = function () {
         $http.get('/contacts').success(function(response){
