@@ -2,14 +2,10 @@
  * Created by Zuhaib on 12/3/2016.
  */
 app.controller('AppCtrl', ['$scope', '$http', 'socket', 'upload', 'appService', function($scope, $http, socket, upload, appService){
-    /*$scope.success = true;*/
-    socket.emit('hello', function () {});
 
-    console.log('appService: ', appService)
+    upload.listenOnInput("upload_input"); //add event listener to the file input
 
-    upload.listenOnInput("upload_input");
-
-    socket.on('fileUploadSuccess', function (data) {
+    socket.on('fileUploadSuccess', function (data) {//check file upload success status
         $scope.success =  data.success;
         console.log('success: ', data.success);
     });
